@@ -1,11 +1,5 @@
 
 
-import bcrypt from 'bcrypt'
-
-const bcryptHash = Meteor.wrapAsync(bcrypt.hash);
-const bcryptCompare = Meteor.wrapAsync(bcrypt.compare);
-const bcryptRounds = 10
-
 const failedLoginMessage = "Invalid token provided"
 
 const userTokenValidator = Match.OneOf(
@@ -33,11 +27,6 @@ const getUserTokenString = userToken => {
 	return userToken;
 }
 
-const hashUserToken = userToken => {
-	userToken = getUserTokenString(userToken);
-	const encrypted = bcryptHash(userToken, bcryptRounds);
-	return encrypted
-};
 
 Accounts.registerLoginHandler("userToken", options=>{
 	if(!options.userToken){

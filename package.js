@@ -1,7 +1,8 @@
 
 Package.describe({
+	name: 'unparallel:accounts-user-token',
 	summary: "Login service for user token",
-	version: "1.0.0",
+	version: "1.0.1",
   // Brief, one-line summary of the package.
   summary: 'Package which allows to authenticate a meteor user using a login token',
   // URL to the Git repository containing the source code for this package.
@@ -12,11 +13,11 @@ Package.describe({
 })
 
 Package.onUse(api => {
-	api.use(['ecmascript']);
-	api.use(['accounts-base','sha','ddp','ejson'], ['client', 'server']);
+	api.versionsFrom('1.10');
+	api.use(['ecmascript@0.14.3','accounts-base@1.6.0 || 2.1.0','sha@1.0.9','ddp@1.4.0','ejson@1.1.1'], ['client', 'server']);
 	// Export Accounts (etc) to packages using this one.
-	api.imply('accounts-base', ['client', 'server']);
-	api.use('check', 'server');
+	api.imply('accounts-base@1.6.0 || 2.1.0', ['client', 'server']);
+	api.use('check@1.3.1', 'server');
 	api.addFiles("userTokenClient.js","client");
 	api.addFiles("userTokenServer.js","server");
 })
